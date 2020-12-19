@@ -26,4 +26,9 @@ class UserController extends Controller
         return redirect()->route('profile.show',Auth::user()->id)
                         ->with('success','Profile has been updated');
     }
+    public function Destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('/');
+    }
 }

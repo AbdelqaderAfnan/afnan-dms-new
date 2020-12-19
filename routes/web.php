@@ -13,20 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//users route
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'] )->name('home');
+
+Auth::routes();
+
+//users routes
 Route::get('/profile/{user}',[App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
 Route::get('/profile/{user}/edit',[App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/{user}',[App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+//documents routes
 Route::resource('/document',App\Http\Controllers\DocumentController::class);
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/document/branch/{branch_name}', [App\Http\Controllers\DocumentController::class, 'branchDoc'])->name('doc_branch');

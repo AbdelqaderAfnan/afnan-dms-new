@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class DocumentController extends Controller
 {
@@ -14,7 +16,8 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        //
+        $Document = Document::latest();
+        return view('Document.index',['document'=>$Document]);
     }
 
     /**
@@ -24,7 +27,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        //
+        return view('Document.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            
+        ]);
+        Document::create($request()->all());
+        return redirect()->route('Document.index');
     }
 
     /**
@@ -46,7 +53,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        //
+        return view('Document.show',['Document'=>$document]);
     }
 
     /**
@@ -57,7 +64,7 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        //
+        return view('Document.edit',['Document'=>$document]);
     }
 
     /**
@@ -69,7 +76,10 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
-        //
+        $document = Document::findOrFail(request('id'));
+        $document->fill($request->all())->save();
+        return redirect()->route('Document.show')
+                        ->with('success','Document has been updated');
     }
 
     /**
@@ -80,6 +90,17 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+        return redirect()->route('Document.index');
+    }
+    public function branchDoc ($branch_name)
+    {
+        return view('document.branch.'.$branch_name);
+        
+
+
+
+
+
     }
 }
