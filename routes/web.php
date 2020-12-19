@@ -20,3 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//users route
+Route::get('/profile/{user}',[App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+Route::get('/profile/{user}/edit',[App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/{user}',[App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
+
+Route::resource('/document',App\Http\Controllers\DocumentController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
