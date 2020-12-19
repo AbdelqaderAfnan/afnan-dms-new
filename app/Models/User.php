@@ -20,6 +20,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'branch_name',
+        'birthday',
+        'address',
+        'phone_number',
+        'position',
+        'image',
+        
     ];
 
     /**
@@ -40,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function document()
+    {
+        return $this->hasMany(Document::class);
+    }
 }
