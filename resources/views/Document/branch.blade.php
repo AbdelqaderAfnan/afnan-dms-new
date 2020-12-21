@@ -40,20 +40,26 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="formModalLabel">Create Todo</h4>
+                            <h4 class="modal-title" id="formModalLabel">Create Folder</h4>
                         </div>
                         <div class="modal-body">
                             <form id="myForm" name="myForm" class="form-horizontal" novalidate="">
                                 <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" class="form-control" id="title" name="title"
-                                            placeholder="Enter title" value="">
+                                    <label>Enter Folder Name</label>
+                                    <input type="text" class="form-control" id="folder_name" name="folder_name"
+                                            placeholder="Enter Folder Name" value="">
+                                    
+                                    <input type="hidden" class="form-control" id="branch_name" name="branch_name"
+                                            placeholder="Enter Folder Name" value="{{$branch}}">
+                                    <input type="hidden" class="form-control" id="cerate_by" name="cerate_by"
+                                            placeholder="Enter Folder Name" value="{{Auth::user()->id}}">
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
+                            <button type="button" class="btn btn-primary" id="btn-save" value="save">Save changes
                             </button>
+                            <button type="button" class="btn btn-primary" id="btn-back" value="back">Back</button>
                             <input type="hidden" id="todo_id" name="todo_id" value="0">
                         </div>
                     </div>

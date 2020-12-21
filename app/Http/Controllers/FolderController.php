@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Response; 
 use App\Models\Folder;
 use Illuminate\Http\Request;
 use DB;
@@ -36,7 +37,8 @@ class FolderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $folder_name = $request->folder_name;
+        return Response::json($folder_name);
     }
 
     /**

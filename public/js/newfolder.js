@@ -6,6 +6,9 @@ jQuery(document).ready(function($){
         jQuery('#myForm').trigger("reset");
         jQuery('#formModal').modal('show');
     });
+    jQuery('#btn-back').click(function(){
+        jQuery('#formModal').modal('hide');
+    });
 
     // CREATE
     $("#btn-save").click(function (e) {
@@ -16,27 +19,19 @@ jQuery(document).ready(function($){
         });
         e.preventDefault();
         var formData = {
-            title: jQuery('#title').val()
+            folder_name: jQuery('#folder_name').val()
         };
         var state = jQuery('#btn-save').val();
         var type = "POST";
-        var todo_id = jQuery('#todo_id').val();
-        var ajaxurl = 'todo';
+        var ajaxurl = '/folder';
+
         $.ajax({
             type: type,
             url: ajaxurl,
             data: formData,
             dataType: 'json',
             success: function (data) {
-                var todo = '<tr id="todo' + data.id + '"><td>' 
-                + data.id + '</td><td>' 
-                + data.title + '</td><td>' 
-                + data.description + '</td></tr>';
-                
-                jQuery('#todos-list').append(todo);
-                jQuery("#todo" + todo_id).replaceWith(todo);
-                jQuery('#myForm').trigger("reset");
-                jQuery('#formModal').modal('hide')
+                console.log(data)
             },
             error: function (data) {
                 console.log(data);
