@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Folder;
 use Illuminate\Http\Request;
-
+use DB;
+use Auth;
 class FolderController extends Controller
 {
     /**
@@ -81,5 +82,13 @@ class FolderController extends Controller
     public function destroy(Folder $folder)
     {
         //
+    }
+    public function branchDoc ($branch_name)
+    {
+        $folders = DB::table('folders')->where('branch_name','=',$branch_name)
+                                      ->where('perent_folder','=',NULL)
+                                      ->orderBy('folder_name')
+                                      ->get();
+        return view('document.branch.'.$branch_name , ['folders'=>$folders]);
     }
 }

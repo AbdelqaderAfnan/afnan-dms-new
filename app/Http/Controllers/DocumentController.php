@@ -93,14 +93,5 @@ class DocumentController extends Controller
         $document->delete();
         return redirect()->route('Document.index');
     }
-    public function branchDoc ($branch_name)
-    {
-        return view('document.branch.'.$branch_name);
-        
-
-
-
-
-
-    }
+    
 }
