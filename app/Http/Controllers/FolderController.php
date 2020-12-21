@@ -89,6 +89,6 @@ class FolderController extends Controller
                                       ->where('perent_folder','=',NULL)
                                       ->orderBy('folder_name')
                                       ->get();
-        return view('document.branch.'.$branch_name , ['folders'=>$folders]);
+        return view('document.branch' , ['folders'=>$folders , 'branch'=>$branch_name]);
     }
 }

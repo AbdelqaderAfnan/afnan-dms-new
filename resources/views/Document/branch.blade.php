@@ -7,15 +7,16 @@
     <div class="container">
         <div class="d-flex bd-highlight mb-4">
             <div class="p-2 w-100 bd-highlight">
-                <h2>Amman Branch</h2>
+                <h2 style="text-transform: uppercase;">{{$branch}} Branch</h2>
             </div>
             <div class="p-2 flex-shrink-0 bd-highlight">
                 <button class="btn btn-success" id="btn-add">
-                    Add New Folder
+                    Add Folder
                 </button>
                 <a href="{{route('home')}}" class="btn btn-primary">Back</a>
             </div>
         </div>
+        
         <div>
             <table class="table table-inverse">
                 <thead>
@@ -43,14 +44,11 @@
                         </div>
                         <div class="modal-body">
                             <form id="myForm" name="myForm" class="form-horizontal" novalidate="">
-    
                                 <div class="form-group">
                                     <label>Title</label>
                                     <input type="text" class="form-control" id="title" name="title"
                                             placeholder="Enter title" value="">
                                 </div>
-    
-                                
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -63,6 +61,7 @@
             </div>
         </div>
     </div>  
+
 
     
     
