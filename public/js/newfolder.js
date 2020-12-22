@@ -46,7 +46,7 @@ jQuery(document).ready(function($){
                     
                     
                     jQuery('#folder_list').append(folder);
-                    //jQuery("#folder" + todo_id).replaceWith(todo);
+                    jQuery("#folder" + data.id).replaceWith(folder);
                     jQuery('#myForm').trigger("reset");
                     jQuery('#formModal').modal('hide')
                     location.reload(true);

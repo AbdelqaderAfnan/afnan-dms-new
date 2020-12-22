@@ -21,17 +21,17 @@
             <table class="table table-inverse">
                 <thead>
                     <tr>
-                        <th>Folder Name</th>
-                        <th>Create By</th>
-                        <th>Create At</th>
+                        <th style="padding:0px">Folder Name</th>
+                        <th style="padding:0px">Create By</th>
+                        <th style="padding:0px">Create At</th>
                     </tr>
                 </thead>
                 <tbody id="folder_list">
                     @foreach ($folders as $folder)
                         <tr id='folder{{$folder->id}}'>
-                            <td><a href="">{{$folder->folder_name}}</a></td>
-                            <td>{{$folder->cerate_by}}</td>
-                            <td>{{$folder->created_at}}</td>
+                            <td style="padding:0px"><a href="">{{$folder->folder_name}}</a></td>
+                            <td style="padding:0px">{{$folder->cerate_by}}</td>
+                            <td style="padding:0px">{{$folder->created_at}}</td>
                         </tr>
                     @endforeach
                 </tbody>
