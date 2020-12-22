@@ -32,6 +32,6 @@ Route::resource('/document',App\Http\Controllers\DocumentController::class);
 
 Route::get('/folder/branch/{branch_name}', [App\Http\Controllers\FolderController::class, 'branchDoc'])->name('doc_branch');
 //Route::post('folder',[App\Http\Controllers\FolderController::class , 'store'])->name('folder.store');
-Route::resource('folder' ,App\Http\Controllers\FolderController::class );   
-
+Route::resource('folder' ,App\Http\Controllers\FolderController::class );
+//Route::get('/folders/{x}' , [App\Http\Controllers\FolderController::class , 'all_folders'])->where('x', '.*');
 

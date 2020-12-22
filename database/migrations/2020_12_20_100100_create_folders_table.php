@@ -20,6 +20,8 @@ class CreateFoldersTable extends Migration
             $table->string('branch_name');
             $table->unsignedbiginteger('perent_folder')->nullable();
             $table->timestamps();
+            $table->foreign('cerate_by')->references('id')->on('users');
+
         });
     }
 

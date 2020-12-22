@@ -9,6 +9,10 @@ use DB;
 use Auth;
 class FolderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,8 +41,14 @@ class FolderController extends Controller
      */
     public function store(Request $request)
     {
-        $folder_name = $request->folder_name;
-        return Response::json($folder_name);
+        $create = Folder::create([
+            'branch_name' => $request->input('branch_name'),
+            'cerate_by'=> $request->input('cerate_by'),
+            'folder_name'=> $request->input('folder_name'),
+        ]);
+        
+        
+        return Response::json($create);
     }
 
     /**
@@ -93,4 +103,13 @@ class FolderController extends Controller
                                       ->get();
         return view('document.branch' , ['folders'=>$folders , 'branch'=>$branch_name]);
     }
+    // public function all_folders($x = '')
+    // {
+    //     $path = explode('/', $x);
+    //     // $path is an array with the directory structure
+    //     // Do whatever you want with it e.g.
+    //     if (empty($path)) {
+    //         return $this->index();
+    //     } 
+    // }s
 }

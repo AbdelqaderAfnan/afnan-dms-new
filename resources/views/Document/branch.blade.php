@@ -26,9 +26,9 @@
                         <th>Create At</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody id="folder_list">
                     @foreach ($folders as $folder)
-                        <tr>
+                        <tr id='folder{{$folder->id}}'>
                             <td><a href="">{{$folder->folder_name}}</a></td>
                             <td>{{$folder->cerate_by}}</td>
                             <td>{{$folder->created_at}}</td>
@@ -48,19 +48,23 @@
                                     <label>Enter Folder Name</label>
                                     <input type="text" class="form-control" id="folder_name" name="folder_name"
                                             placeholder="Enter Folder Name" value="">
-                                    
-                                    <input type="hidden" class="form-control" id="branch_name" name="branch_name"
-                                            placeholder="Enter Folder Name" value="{{$branch}}">
-                                    <input type="hidden" class="form-control" id="cerate_by" name="cerate_by"
-                                            placeholder="Enter Folder Name" value="{{Auth::user()->id}}">
                                 </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="branch_name" name="branch_name"
+                                            value="{{$branch}}">
+                                </div>
+                                <div class="form-group">           
+                                    <input type="hidden" class="form-control" id="cerate_by" name="cerate_by"
+                                            value="{{Auth::user()->id}}">
+                                </div>
+                                @csrf
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-save" value="save">Save changes
+                            <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
                             </button>
                             <button type="button" class="btn btn-primary" id="btn-back" value="back">Back</button>
-                            <input type="hidden" id="todo_id" name="todo_id" value="0">
+                            <input type="hidden" id="folder_id" name="folder_id" value="0">
                         </div>
                     </div>
                 </div>
