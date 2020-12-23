@@ -16,11 +16,11 @@ class CreateFoldersTable extends Migration
         Schema::create('folders', function (Blueprint $table) {
             $table->id();
             $table->string('folder_name')->nullable();
-            $table->unsignedbiginteger('cerate_by');
+            $table->unsignedbiginteger('user_id');
             $table->string('branch_name');
             $table->unsignedbiginteger('perent_folder')->nullable();
             $table->timestamps();
-            $table->foreign('cerate_by')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }

@@ -18,9 +18,11 @@ class CreateDocumentsTable extends Migration
             $table->string('doc_type',200)->nullable();
             $table->date('date')->nullable();
             $table->unsignedbiginteger('user_id');
+            $table->unsignedbiginteger('folder_id');
             $table->text('subject')->nullable();
             $table->text('document')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('folder_id')->references('id')->on('folders');
             $table->timestamps();
         });
     }

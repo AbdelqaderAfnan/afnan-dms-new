@@ -7,7 +7,7 @@
     <div class="container">
         <div class="d-flex bd-highlight mb-4">
             <div class="p-2 w-100 bd-highlight">
-                <h2 style="text-transform: uppercase;">{{$branch}} Branch</h2>
+                <h2 style="text-transform: uppercase;">{{$branch_name}} Branch</h2>
             </div>
             <div class="p-2 flex-shrink-0 bd-highlight">
                 <button class="btn btn-success" id="btn-add">
@@ -28,9 +28,10 @@
                 </thead>
                 <tbody id="folder_list">
                     @foreach ($folders as $folder)
+                    
                         <tr id='folder{{$folder->id}}'>
                             <td style="padding:0px"><a href="">{{$folder->folder_name}}</a></td>
-                            <td style="padding:0px">{{$folder->cerate_by}}</td>
+                            <td style="padding:0px">{{$folder->user->name}}</td>
                             <td style="padding:0px">{{$folder->created_at}}</td>
                         </tr>
                     @endforeach
@@ -51,10 +52,10 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="branch_name" name="branch_name"
-                                            value="{{$branch}}">
+                                            value="{{$branch_name}}">
                                 </div>
                                 <div class="form-group">           
-                                    <input type="hidden" class="form-control" id="cerate_by" name="cerate_by"
+                                    <input type="hidden" class="form-control" id="user_id" name="user_id"
                                             value="{{Auth::user()->id}}">
                                 </div>
                                 @csrf

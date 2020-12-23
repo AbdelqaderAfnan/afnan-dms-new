@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Folder extends Model
 {
+    protected $guarded = [];
     use HasFactory;
     protected $fillable = [
         'folder_name',
-        'cerate_by',
+        'user_id',
         'branch_name',
         'perent_folder',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , $foreignKey = 'user_id');
+    }
+    public function document()
+    {
+        return $this->hasMany(Document::class);
     }
 }

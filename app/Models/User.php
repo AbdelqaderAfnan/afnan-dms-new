@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
+    protected $guarded = [];
     /**
      * The attributes that are mass assignable.
      *
@@ -54,6 +54,6 @@ class User extends Authenticatable
     }
     public function folder()
     {
-        return $this->hasMany(folder::class);
+        return $this->hasMany(Folder::class);
     }
 }

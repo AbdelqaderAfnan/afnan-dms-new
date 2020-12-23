@@ -21,7 +21,7 @@ jQuery(document).ready(function($){
         var formData = {
             folder_name: jQuery('#folder_name').val(),
             branch_name: jQuery('#branch_name').val(),
-            cerate_by:   jQuery('#cerate_by').val(),
+            user_id:   jQuery('#user_id').val(),
             _token:   jQuery('#_token').val(),
         };
         
@@ -34,14 +34,16 @@ jQuery(document).ready(function($){
             url: ajaxurl,
             data: formData,
             dataType: 'json',
-            success: function (data) {
+            success: function (data) 
+            {
+                
                 if(state == 'add')
                 {
                     console.log('success');
                     console.log(data);
                     var folder = '<tr id="folder' + data.id + '"><td>' 
                     + data.folder_name + '</td><td>' 
-                    + data.cerate_by + '</td><td>' 
+                    + data.user_id + '</td><td>' 
                     + data.created_at + '</td></tr>';
                     
                     
@@ -50,12 +52,10 @@ jQuery(document).ready(function($){
                     jQuery('#myForm').trigger("reset");
                     jQuery('#formModal').modal('hide')
                     location.reload(true);
-                    }
-                
-                
+                }  
             },
-            error: function (data) {
-                
+            error: function (data) 
+            {
                 console.log('fail');
                 console.log(data);
             }

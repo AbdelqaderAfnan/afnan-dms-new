@@ -41,12 +41,13 @@ class FolderController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::user()->id;
         $create = Folder::create([
             'branch_name' => $request->input('branch_name'),
-            'cerate_by'=> $request->input('cerate_by'),
+            'user_id'=> $user_id,
             'folder_name'=> $request->input('folder_name'),
         ]);
-        
+        //$create = $request->input('user_id');
         
         return Response::json($create);
     }
@@ -97,11 +98,9 @@ class FolderController extends Controller
     }
     public function branchDoc ($branch_name)
     {
-        $folders = DB::table('folders')->where('branch_name','=',$branch_name)
-                                      ->where('perent_folder','=',NULL)
-                                      ->orderBy('folder_name')
-                                      ->get();
-        return view('document.branch' , ['folders'=>$folders , 'branch'=>$branch_name]);
+        $folders = Folder::latest()->paginate(5);
+        
+        return view('document.branch' , compact(['folders' , 'branch_name']));
     }
     // public function all_folders($x = '')
     // {
