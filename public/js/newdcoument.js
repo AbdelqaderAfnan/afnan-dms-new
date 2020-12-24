@@ -1,10 +1,10 @@
 jQuery(document).ready(function($){
 
     //----- Open model CREATE -----//
-    jQuery('#btn-add').click(function () {
+    jQuery('#btn-add-document').click(function () {
         jQuery('#btn-save').val("add");
         jQuery('#myForm').trigger("reset");
-        jQuery('#formModal').modal('show');
+        jQuery('#formModal-document').modal('show');
     });
     jQuery('#btn-back').click(function(){
         jQuery('#formModal').modal('hide');

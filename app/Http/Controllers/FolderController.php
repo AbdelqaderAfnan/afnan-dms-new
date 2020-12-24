@@ -42,10 +42,12 @@ class FolderController extends Controller
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
+        
         $create = Folder::create([
-            'branch_name' => $request->input('branch_name'),
-            'user_id'=> $user_id,
-            'folder_name'=> $request->input('folder_name'),
+            'folder_name'=>     $request->input('folder_name'),
+            'user_id'=>         $user_id,
+            'branch_name' =>    $request->input('branch_name'),
+            'perent_folder' =>  $request->input('perent_folder'),
         ]);
         //$create = $request->input('user_id');
         
@@ -96,19 +98,33 @@ class FolderController extends Controller
     {
         //
     }
-    public function branchDoc ($branch_name)
+    public function root ($branch_name)
     {
-        $folders = Folder::latest()->paginate(5);
         
-        return view('document.branch' , compact(['folders' , 'branch_name']));
+        $folders = Folder::where('branch_name',$branch_name)
+                            ->where('perent_folder',NULL)
+                            ->orderBy('folder_name')->get();
+        $current_folder = NULL;
+        return view('document.branch' , compact(['folders' , 'branch_name' , 'current_folder']));
     }
-    // public function all_folders($x = '')
-    // {
-    //     $path = explode('/', $x);
-    //     // $path is an array with the directory structure
-    //     // Do whatever you want with it e.g.
-    //     if (empty($path)) {
-    //         return $this->index();
-    //     } 
-    // }s
+    public function branchDoc($x = '')
+    {
+        $path = explode('/', $x);
+        if (count($path) == 1)
+        {
+            
+            return $this->root($x);
+        }
+        $folders = Folder::where('perent_folder',end($path))->get();
+        $branch_name = $path['0'];
+        $current_folder = last($path);
+        
+        return view('document.branch' , compact(['folders' , 'branch_name' , 'current_folder']));
+        dd(last($path));
+        // $path is an array with the directory structure
+        // Do whatever you want with it e.g.
+        // if (empty($path)) {
+        //     return $this->branchDoc($branch_name = $x);
+        // } 
+    }
 }

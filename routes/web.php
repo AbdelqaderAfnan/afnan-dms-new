@@ -30,8 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::resource('/document',App\Http\Controllers\DocumentController::class);
 
 
-Route::get('/folder/branch/{branch_name}', [App\Http\Controllers\FolderController::class, 'branchDoc'])->name('doc_branch');
+//Route::get('/folder/branch/{branch_name}', [App\Http\Controllers\FolderController::class, 'branchDoc'])->name('doc_branch');
 //Route::post('folder',[App\Http\Controllers\FolderController::class , 'store'])->name('folder.store');
 Route::resource('folder' ,App\Http\Controllers\FolderController::class );
-//Route::get('/folders/{x}' , [App\Http\Controllers\FolderController::class , 'all_folders'])->where('x', '.*');
+Route::get('/folders/branch/{x}' , [App\Http\Controllers\FolderController::class , 'branchDoc'])->where('x', '.*')->name('doc_branch');
 
