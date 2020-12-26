@@ -3,15 +3,15 @@ jQuery(document).ready(function($){
     //----- Open model CREATE -----//
     jQuery('#btn-add-document').click(function () {
         jQuery('#btn-save').val("add");
-        jQuery('#myForm').trigger("reset");
+        jQuery('#myForm-document').trigger("reset");
         jQuery('#formModal-document').modal('show');
     });
-    jQuery('#btn-back').click(function(){
-        jQuery('#formModal').modal('hide');
+    jQuery('#btn-hide').click(function(){
+        jQuery('#formModal-document').modal('hide');
     });
 
     // CREATE
-    $("#btn-save").click(function (e) {
+    $("#btn-save-document").click(function (e) {
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

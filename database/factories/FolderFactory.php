@@ -22,7 +22,11 @@ class FolderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'folder_name' => $this->faker->name,
+            'user_id' => '1',
+            'branch_name' => 'erbil',
+            'perent_folder' => '1',
+            
         ];
     }
 }

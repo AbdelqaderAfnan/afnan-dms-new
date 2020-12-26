@@ -18,6 +18,7 @@ class CreateFoldersTable extends Migration
             $table->string('folder_name')->nullable();
             $table->unsignedbiginteger('user_id');
             $table->string('branch_name');
+            $table->string('status', 200)->nullable();
             $table->unsignedbiginteger('perent_folder')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

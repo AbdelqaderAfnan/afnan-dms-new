@@ -16,9 +16,10 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('doc_type',200)->nullable();
-            $table->date('date')->nullable();
+            
             $table->unsignedbiginteger('user_id');
             $table->unsignedbiginteger('folder_id');
+            $table->string('branch_name',200)->nullabel();
             $table->text('subject')->nullable();
             $table->text('document')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
