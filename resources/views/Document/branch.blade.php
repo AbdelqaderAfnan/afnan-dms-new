@@ -26,8 +26,10 @@
                     </a>
                 </h2>
                 @foreach ($folder_name as $name)
-                    {{$name}}->
+                    <span>{{$name}} /</span>
+
                 @endforeach
+                
             </div>
             <div class="p-2 flex-shrink-0 bd-highlight">
                 @if ($final_url != route('home'))

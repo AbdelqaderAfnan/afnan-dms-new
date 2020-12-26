@@ -120,8 +120,8 @@ class FolderController extends Controller
                             ->where('status' , NULL)
                             ->orderBy('folder_name')->get();
         $current_folder = NULL;
-
-        return view('document.branch' , compact(['folders' , 'branch_name' , 'current_folder']));
+        $folder_name = [$branch_name];
+        return view('document.branch' , compact(['folders' , 'branch_name' , 'current_folder' , 'folder_name']));
     }
     public function branchDoc($x = '')
     {
