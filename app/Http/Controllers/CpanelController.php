@@ -18,7 +18,8 @@ class CpanelController extends Controller
      */
     public function index()
     {
-        //
+        $Users = User::latest()->get();
+        return view('admin.cpanel.index' , ['users' => $Users]);
     }
 
     /**
@@ -28,7 +29,7 @@ class CpanelController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.cpanel.create');
     }
 
     /**
@@ -39,7 +40,9 @@ class CpanelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            
+            ]);
     }
 
     /**
@@ -50,7 +53,7 @@ class CpanelController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.cpanel.show');  
+        return view('admin.cpanel.show' , ['user' => $user]);  
     }
 
     /**
@@ -61,7 +64,7 @@ class CpanelController extends Controller
      */
     public function edit(User $user)
     {
-        
+        return view('admin.cpanel.edit' , ['user' => $user]);
     }
 
     /**
@@ -73,7 +76,10 @@ class CpanelController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            
+        ]);
+        
     }
 
     /**
@@ -84,6 +90,7 @@ class CpanelController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('/');
     }
 }

@@ -54,12 +54,16 @@
                             @endif
                         @else
                             <li  class="nav-item">
+                                <a class="nav-link " href="{{url('/')}}">Home</a>
+                            </li>
+                            <li  class="nav-item">
                                 <a class="nav-link " href="{{route('profile.show',Auth::user()->id)}}">Profile</a>
                             </li>
                             @if (Auth::user()->isadmin == 1)
                                 <li  class="nav-item">
                                     <a class="nav-link " href="{{route('cpanel.show',Auth::user()->id)}}">Admin Panel</a>
                                 </li>
+                                
                                 <li class="nav-item">
                                     @yield('header')
                                 </li>
