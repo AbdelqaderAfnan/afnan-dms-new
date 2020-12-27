@@ -26,6 +26,7 @@ class User extends Authenticatable
         'phone_number',
         'position',
         'image',
+        'isadmin',
         
     ];
 

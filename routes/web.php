@@ -28,10 +28,11 @@ Route::put('/profile/{user}',[App\Http\Controllers\UserController::class, 'updat
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 //documents routes
 Route::resource('/document',App\Http\Controllers\DocumentController::class);
-
+Route::resource('cpanel' ,App\Http\Controllers\CpanelController::class );
 
 //Route::get('/folder/branch/{branch_name}', [App\Http\Controllers\FolderController::class, 'branchDoc'])->name('doc_branch');
 //Route::post('folder',[App\Http\Controllers\FolderController::class , 'store'])->name('folder.store');
 Route::resource('folder' ,App\Http\Controllers\FolderController::class );
 Route::get('/folders/branch/{x}' , [App\Http\Controllers\FolderController::class , 'branchDoc'])->where('x', '.*')->name('doc_branch');
+
 
