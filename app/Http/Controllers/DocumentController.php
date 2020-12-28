@@ -42,11 +42,33 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            
-        ]);
-        Document::create($request()->all());
-        return redirect()->route('Document.index');
+        $input=$request->all();
+        $images=array();
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                $name=$file->getClientOriginalName();
+                $file->move(public_path('images'."\\" .$request['branch_name']."\\".$request['folder_id']), $name);
+                $images[]=$name;
+                $ext = pathinfo($name, PATHINFO_EXTENSION);
+                Document::create( [
+                    'doc_type' => $ext,
+                    'document'=>  $name,
+                    'user_id' =>$input['user_id'],
+                    'folder_id' =>$input['folder_id'],
+                    'branch_name' => $input['branch_name'],
+        
+                    //you can put other insertion here
+                ]);
+                
+                
+            }
+        }
+       
+        
+    
+        dd($images);
+
+        
     }
 
     /**

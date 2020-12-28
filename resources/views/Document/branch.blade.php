@@ -84,6 +84,28 @@
                             </tr>
                         
                     @endforeach
+                    @if($final_url != route('home'))
+                        <tr>
+                            <th style="padding:0px ; width: 44%">Document Name</th>
+                            <th style="padding:0px ; width: 20%">Create By</th>
+                            <th style="padding:0px ; width: 18%">Create At</th>
+                            <th style="padding:0px ; width: 18%">Update At</th>
+                        </tr>
+                        @foreach ($documents as $doc)
+                            
+                                <tr id='doc{{$doc->id}}'>
+                                    <td style="padding:0px">
+                                        <a href="{{route('download' , [$branch_name,$current_folder,$doc->document])}}">
+                                            {{$doc->document}}
+                                        </a>
+                                    </td>
+                                    <td style="padding:0px">{{$doc->user->name}}</td>
+                                    <td style="padding:0px">{{$doc->created_at}}</td>
+                                    <td style="padding:0px">{{$doc->updated_at}}</td>
+                                </tr>
+                            
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
             <div class="modal fade" id="formModal" aria-hidden="true">
@@ -118,7 +140,7 @@
                             <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
                             </button>
                             <button type="button" class="btn btn-primary" id="btn-back" value="back">Back</button>
-                            <input type="hidden" id="folder_id" name="folder_id" value="0">
+                            
                         </div>
                     </div>
                 </div>
@@ -133,11 +155,15 @@
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <form id="myForm-document" name="myForm-document" class="form-horizontal" novalidate="">
+                            <form class="form-horizontal"
+                             enctype="multipart/form-data"
+                             id="add-files"
+                             method="post" action="/document">
                                 <div class="form-group">
                                     <label>Enter Folder Name</label>
                                     <br>
-                                    <input id="file-1" type="file" name="file" multiple class="file"  data-min-file-count="4">
+                                    <input required type="file" class="form-control"
+                                     name="images[]" placeholder="address" multiple>
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="branch_name" name="branch_name"
@@ -147,18 +173,22 @@
                                     <input type="hidden" class="form-control" id="user_id" name="user_id"
                                             value="{{Auth::user()->id}}">
                                 </div>
-                                @csrf
+                                
                                 <div class="form-group">           
-                                    <input type="hidden" class="form-control" id="perent_folder" name="perent_folder"
+                                    <input type="hidden" class="form-control" id="folder_id" name="folder_id"
                                             value="{{$current_folder}}">
                                 </div>
+                                @csrf
                             </form>
+                            
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-save-document" value="add">Save changes
-                            </button>
+                            
+                            <input type="submit" onclick="event.preventDefault();
+                            document.getElementById('add-files').submit();" class="btn btn-primary" value="Add Files">
+                            
                             <button type="button" class="btn btn-primary" id="btn-hide" value="back">Back</button>
-                            <input type="hidden" id="folder_id" name="folder_id" value="0">
+                            
                         </div>
                     </div>
                 </div>

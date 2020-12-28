@@ -36,3 +36,21 @@ Route::resource('folder' ,App\Http\Controllers\FolderController::class );
 Route::get('/folders/branch/{x}' , [App\Http\Controllers\FolderController::class , 'branchDoc'])->where('x', '.*')->name('doc_branch');
 
 
+Route::get('download/{branch_name}/{folder_id}/{filename}', function($branch_name , $folder_id , $filename)
+{
+    // Check if file exists in app/storage/file folder
+    $file_path = public_path('images'."\\" .$branch_name."\\".$folder_id."\\".$filename);
+    if (file_exists($file_path))
+    {
+        // Send Download
+        return Response::download($file_path, $filename, [
+            'Content-Length: '. filesize($file_path)
+        ]);
+    }
+    else
+    {
+        // Error
+        exit('Requested file does not exist on our server!');
+    }
+})
+->where('filename', '[A-Za-z0-9\-\_\.]+')->name('download');

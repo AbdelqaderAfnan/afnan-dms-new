@@ -12,9 +12,11 @@ class Document extends Model
     protected $fillable = [
         'doc_type',
         'date',
-        'user_id ',
+        'user_id',
         'subject',
         'folder_id',
+        'branch_name',
+        'document',
     ];
 
     public function user()
