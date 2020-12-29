@@ -94,10 +94,21 @@
                         @foreach ($documents as $doc)
                             
                                 <tr id='doc{{$doc->id}}'>
+                                    
                                     <td style="padding:0px">
                                         <a href="{{route('download' , [$branch_name,$current_folder,$doc->document])}}">
                                             {{$doc->document}}
                                         </a>
+                                        <form class="delete-form" id="delete-document{{$doc->id}}" style="display: inline" action="{{route('document.destroy',$doc->id)}}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            @csrf
+                                            
+                                            <a onclick="event.preventDefault();
+                                            document.getElementById('delete-document{{$doc->id}}').submit();" href="">
+                                                <img class="float-right" style="width: 20px"
+                                                src="{{asset('img/delete-icon.png')}}" alt="delete document">
+                                            </a>
+                                        </form>
                                     </td>
                                     <td style="padding:0px">{{$doc->user->name}}</td>
                                     <td style="padding:0px">{{$doc->created_at}}</td>
@@ -196,6 +207,7 @@
             @endif
         </div>
     </div>  
+    
 
 
     

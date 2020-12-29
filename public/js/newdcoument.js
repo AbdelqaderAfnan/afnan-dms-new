@@ -12,3 +12,14 @@ jQuery(document).ready(function($){
 
     
 });
+
+jQuery(document).ready(function($){
+
+    //----- Open model CREATE -----//
+    jQuery('form.delete-form').submit(function () {
+        return confirm('Sure?');
+    });
+    
+
+    
+});

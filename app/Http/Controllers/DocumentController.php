@@ -6,7 +6,7 @@ use App\Models\Document;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-
+use Illuminate\Support\Facades\File;
 class DocumentController extends Controller
 {
     public function __construct()
@@ -66,7 +66,7 @@ class DocumentController extends Controller
        
         
     
-        dd($images);
+        return redirect(url()->previous());
 
         
     }
@@ -116,8 +116,12 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
+       
+        $destinationPath = public_path('images'."\\".$document->branch_name ."\\".
+                            $document->folder_id);
+        $delete = unlink($destinationPath.'/'.$document->document);
         $document->delete();
-        return redirect()->route('Document.index');
+        return redirect(url()->previous());
     }
     
 }
