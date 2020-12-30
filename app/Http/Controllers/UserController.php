@@ -8,6 +8,10 @@ use Auth;
 use DB;
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //This will show the user data
     //Input user id return user row
     public function show(User $user)
@@ -29,6 +33,12 @@ class UserController extends Controller
     public function Destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('/');
+        return redirect(url()->previous());
+    }
+    public function index()
+    {
+        $users = User::latest()->get();
+        return view('admin.cpanel.index' , ['users'=>$users]);
+        
     }
 }

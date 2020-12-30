@@ -61,7 +61,7 @@
                             </li>
                             @if (Auth::user()->isadmin == 1)
                                 <li  class="nav-item">
-                                    <a class="nav-link " href="{{route('cpanel.show',Auth::user()->id)}}">Admin Panel</a>
+                                    <a class="nav-link " href="{{route('users.index')}}">Admin Panel</a>
                                 </li>
                                 
                                 <li class="nav-item">
