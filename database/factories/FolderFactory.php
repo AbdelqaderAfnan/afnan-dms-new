@@ -24,7 +24,7 @@ class FolderFactory extends Factory
         return [
             'folder_name' => $this->faker->name,
             'user_id' => '1',
-            'branch_name' => 'amman',
+            'branch_name' => 'erbil',
             'perent_folder' => NULL,
             
         ];
