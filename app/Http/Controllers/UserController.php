@@ -12,8 +12,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    //This will show the user data
-    //Input user id return user row
+
     public function show(User $user)
     {
        return view('profile.show',['profile'=>$user]); 
