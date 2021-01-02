@@ -15,7 +15,7 @@
                 
                 
                 <button class="btn btn-success" id="btn-add">
-                    Manage Role
+                    Manage Roles
                 </button>
                 
                 <a href="{{route('home')}}" class="btn btn-primary">
@@ -45,7 +45,7 @@
                             <td></td>
                             <td style="width: 19%" class="text-center">
                                 <button class="btn btn-primary">Show</button>
-                                <button class="btn btn-secondary">Edit</button>
+                                <a class="btn btn-secondary" href="{{route('cpanel.edit', Auth::user()->id)}}">Edit</a>
                                 <form action="{{route('users.destroy',$user->id )}}" method="POST" style="display: inline">
                                     @method('delete')
                                     @csrf

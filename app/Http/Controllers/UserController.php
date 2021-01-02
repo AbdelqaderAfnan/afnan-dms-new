@@ -19,15 +19,27 @@ class UserController extends Controller
     }
     public function edit(User $user)
     {
+        
+        
         return view('profile.edit',['profile'=>$user]);
     }
     public function update(Request $request, User $user)
     {
+        $url =url()->previous();
         
         $user = User::findOrFail(request('id'));
         $user->fill($request->all())->save();
-        return redirect()->route('profile.show',Auth::user()->id)
+        if($url == "http://afnan-dms.test/cpanel/1/edit")
+        {
+            return redirect()->route('cpanel.index')
                         ->with('success','Profile has been updated');
+        }
+        else
+        {
+            return redirect()->route('profile.show',Auth::user()->id)
+                        ->with('success','Profile has been updated');
+        }
+        
     }
     public function Destroy(User $user)
     {

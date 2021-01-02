@@ -62,9 +62,9 @@ class CpanelController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $cpanel)
     {
-        return view('admin.cpanel.edit' , ['user' => $user]);
+        return view('admin.cpanel.edit' , ['user' => $cpanel]);
     }
 
     /**
