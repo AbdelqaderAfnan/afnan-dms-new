@@ -3,7 +3,8 @@
 @section('content')
 
 <?php 
-    $test_url = "http://afnan-dms.test/folders/branch/".$branch_name;
+    $test_url = "http://afnan-dms.test/folders/branch/".$branch_name_url;
+    //dd($current_folder);
     if(url()->current() == $test_url)
     {
         $final_url =  route('home');
@@ -21,7 +22,7 @@
         <div class="d-flex bd-highlight mb-4">
             <div class="p-2 w-100 bd-highlight">
                 <h2 style="text-transform: uppercase;">
-                    <a style="color: black" href="http://afnan-dms.test/folders/branch/{{$branch_name}}">
+                    <a style="color: black" href="http://afnan-dms.test/folders/branch/{{$branch_name_url}}">
                         {{$branch_name}} Branch
                     </a>
                 </h2>
@@ -134,7 +135,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="branch_name" name="branch_name"
-                                            value="{{$branch_name}}">
+                                            value="{{$branch_name_url}}">
                                 </div>
                                 <div class="form-group">           
                                     <input type="hidden" class="form-control" id="user_id" name="user_id"

@@ -98,48 +98,106 @@ class FolderController extends Controller
      */
     public function destroy(Folder $folder)
     {
-        
         Folder::where('id',$folder->id)->update(['status'=>'deleted']);
         $url = url()->previous();
         while (is_numeric(substr($url, -1)) ==  "true") {
             $url = substr($url, 0,-1);
         }
-        $final_url =  $url;
-        return redirect($final_url);
-
-
-        
-        
-
+        return redirect($url);
     }
     public function root ($branch_name)
     {
-        
         $folders = Folder::where('branch_name',$branch_name)
                             ->where('perent_folder',NULL)
                             ->where('status' , NULL)
                             ->orderBy('folder_name')->get();
         $current_folder = NULL;
         $folder_name = [$branch_name];
-        return view('document.branch' , compact(['folders' , 'branch_name' , 'current_folder' , 'folder_name']));
+        $branch_name_url = $branch_name;
+
+
+
+        if($branch_name == "erbiltoamman")
+        {
+            $branch_name = "erbil to amman";
+        }
+        elseif($branch_name  == "erbiltobaghdad")        
+        {
+            $branch_name = "erbil to baghdad";
+        }
+        elseif($branch_name  == "ammantoerbil")        
+        {
+            $branch_name = "amman to erbil";
+        }
+        elseif($branch_name  == "ammantobaghdad")        
+        {
+            $branch_name = "amman to baghdad";
+        }
+        elseif($branch_name  == "baghdadtoamman")        
+        {
+            $branch_name = "baghdad to amman";
+        }
+        elseif($branch_name  == "baghdadtoerbil")        
+        {
+            $branch_name = "baghdad to erbil";
+        }
+        
+
+
+        return view('document.branch' , compact([
+                                                'folders'       ,
+                                                'branch_name'   ,
+                                                'current_folder',
+                                                'folder_name',
+                                                'branch_name_url'
+                                                ]));
     }
     public function branchDoc($x = '')
     {
         $path = explode('/', $x);
         
-        if (count($path) == 1)
-        { 
-           return $this->root($x);
+        if (count($path) == 1 )
+        {
+            return $this->root($x);
+        }
+        $perent = end($path);
+        $current_folder = last($path);
+        $branch_name    = $path['0'];
+        
+        if($branch_name == "erbiltoamman")
+        {
+            $branch_name = "erbil to amman";
+        }
+        elseif($branch_name  == "erbiltobaghdad")        
+        {
+            $branch_name = "erbil to baghdad";
+        }
+        elseif($branch_name  == "ammantoerbil")        
+        {
+            $branch_name = "amman to erbil";
+        }
+        elseif($branch_name  == "ammantobaghdad")        
+        {
+            $branch_name = "amman to baghdad";
+        }
+        elseif($branch_name  == "baghdadtoamman")        
+        {
+            $branch_name = "baghdad to amman";
+        }
+        elseif($branch_name  == "baghdadtoerbil")        
+        {
+            $branch_name = "baghdad to erbil";
         }
         
-        $folders        = Folder::where('perent_folder',end($path))
-                                    ->where('status' , NULL)
-                                    ->orderBy('folder_name')->get();
+
+        $folders        = Folder::where('perent_folder',$perent)
+                                ->where('status' , NULL)
+                                ->orderBy('folder_name')->get();
         
-        $branch_name    = $path['0'];
-        $current_folder = last($path);
+        $branch_name_url = $path['0'];
+        
         $documents      = Document::where('folder_id',$current_folder)->get();
-        $folder_name = [$branch_name];
+        $folder_name    = [$branch_name];
         
         for($i=1 ; $i<count($path) ; $i++)
         {
@@ -159,7 +217,7 @@ class FolderController extends Controller
                                                 'current_folder',
                                                 'documents',
                                                 'folder_name',
-                                                
+                                                'branch_name_url'
                                                 ]));
         
     }
