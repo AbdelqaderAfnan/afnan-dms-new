@@ -43,17 +43,31 @@ class FolderController extends Controller
      */
     public function store(Request $request)
     {
+        $folder_name = $request->input('folder_name');
+        $perent_folder = $request->input('perent_folder');
         $user_id = Auth::user()->id;
+        $test_uniqe = DB::table('folders')->where('folder_name' , '=' ,$request->input('folder_name'))
+                                         ->where('perent_folder' , '=' ,$request->input('perent_folder'))
+                                         ->get();
+        $rowcount = $test_uniqe->count();
         
-        $create = Folder::create([
-            'folder_name'=>     $request->input('folder_name'),
-            'user_id'=>         $user_id,
-            'branch_name' =>    $request->input('branch_name'),
-            'perent_folder' =>  $request->input('perent_folder'),
-        ]);
-        //$create = $request->input('user_id');
+        if($rowcount == 0)
+        {
+            
+            $create = Folder::create([
+                'folder_name'   =>  $request->input('folder_name'),
+                'user_id'       =>  $user_id,
+                'branch_name'   =>  $request->input('branch_name'),
+                'perent_folder' =>  $request->input('perent_folder'),
+            ]);
+            //$create = $request->input('user_id');
+            return Response::json($rowcount);
+            return Response::json($create);
+        }
+        else{
+            return Response::json('folder name not uniqe');
+        }
         
-        return Response::json($create);
     }
 
     /**

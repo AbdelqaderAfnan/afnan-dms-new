@@ -38,22 +38,19 @@ jQuery(document).ready(function($){
             dataType: 'json',
             success: function (data) 
             {
-                
                 if(state == 'add')
                 {
                     console.log('success');
                     console.log(data);
-                    var folder = '<tr id="folder' + data.id + '"><td>' 
-                    + data.folder_name + '</td><td>' 
-                    + data.user_id + '</td><td>' 
-                    + data.created_at + '</td></tr>';
-                    
-                    
-                    jQuery('#folder_list').append(folder);
-                    jQuery("#folder" + data.id).replaceWith(folder);
-                    jQuery('#myForm').trigger("reset");
-                    jQuery('#formModal').modal('hide')
-                    location.reload(true);
+                    if (data == "folder name not uniqe")
+                    {
+                        alert('Folder Already exist');
+                    }
+                    else{
+                        jQuery('#myForm').trigger("reset");
+                        jQuery('#formModal').modal('hide');
+                        location.reload(true);
+                    }
                 }  
             },
             error: function (data) 
