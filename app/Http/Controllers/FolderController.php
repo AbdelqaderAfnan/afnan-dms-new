@@ -48,6 +48,7 @@ class FolderController extends Controller
         $user_id = Auth::user()->id;
         $test_uniqe = DB::table('folders')->where('folder_name' , '=' ,$request->input('folder_name'))
                                          ->where('perent_folder' , '=' ,$request->input('perent_folder'))
+                                         ->where('branch_name' , '=' ,$request->input('branch_name'))
                                          ->get();
         $rowcount = $test_uniqe->count();
         

@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="branch_name" name="branch_name"
-                                            value="{{$branch_name}}">
+                                            value="{{$branch_name_url}}">
                                 </div>
                                 <div class="form-group">           
                                     <input type="hidden" class="form-control" id="user_id" name="user_id"
