@@ -17,6 +17,7 @@ class Document extends Model
         'folder_id',
         'branch_name',
         'document',
+        'ext',
     ];
 
     public function user()

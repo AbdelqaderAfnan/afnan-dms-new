@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Response; 
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Auth;
@@ -46,26 +47,37 @@ class DocumentController extends Controller
         $images=array();
         if($files=$request->file('images')){
             foreach($files as $file){
+                $images[] =$file; 
                 $name=$file->getClientOriginalName();
-                $file->move(public_path('images'."\\" .$request['branch_name']."\\".$request['folder_id']), $name);
-                $images[]=$name;
+                
+                
                 $ext = pathinfo($name, PATHINFO_EXTENSION);
-                Document::create( [
-                    'doc_type' => $ext,
-                    'document'=>  $name,
-                    'user_id' =>$input['user_id'],
-                    'folder_id' =>$input['folder_id'],
-                    'branch_name' => $input['branch_name'],
-        
-                    //you can put other insertion here
-                ]);
+                $test_document = DB::table('documents')->where('document' , $name)
+                                                ->where('ext' , $ext)
+                                                ->where('folder_id' , $input['folder_id'])
+                                                ->count();
                 
-                
+                $file->move(public_path('images'."\\" .$request['branch_name']."\\".$request['folder_id']), $name);
+                if($test_document == 0)
+                {
+                    Document::create( [
+                             'doc_type' => $ext,
+                            'document'=>  $name,
+                            'ext'=>  $ext,
+                            'user_id' =>$input['user_id'],
+                            'folder_id' =>$input['folder_id'],
+                            'branch_name' => $input['branch_name'],
+                        ]);
+                    
+                }
+                else
+                {
+                    //do nothing
+
+                }
+                // $images[]=$name; 
             }
         }
-       
-        
-    
         return redirect(url()->previous());
 
         

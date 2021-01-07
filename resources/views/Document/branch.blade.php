@@ -3,6 +3,7 @@
 @section('content')
 
 <?php 
+    
     $test_url = "http://afnan-dms.test/folders/branch/".$branch_name_url;
     //dd($current_folder);
     if(url()->current() == $test_url)
@@ -60,32 +61,33 @@
         
         <div>
             <table class="table table-inverse">
-                <thead>
+                @if(count($folders) != 0)
+                <tbody id="folder_list">
                     <tr>
                         <th style="padding:0px ; width: 44%">Folder Name</th>
                         <th style="padding:0px ; width: 20%">Create By</th>
                         <th style="padding:0px ; width: 18%">Create At</th>
                         <th style="padding:0px ; width: 18%">Update At</th>
                     </tr>
-                </thead>
-                <tbody id="folder_list">
-                    @foreach ($folders as $folder)
-                        
-                            <tr id='folder{{$folder->id}}'>
-                                <td style="padding:0px">
-                                        <a href="<?php echo url()->current();
-                                                    echo '/'.$folder->id;
-                                        ?>">
-                                            {{$folder->folder_name}}
-                                        </a>
-                                </td>
-                                <td style="padding:0px">{{$folder->user->name}}</td>
-                                <td style="padding:0px">{{$folder->created_at}}</td>
-                                <td style="padding:0px">{{$folder->updated_at}}</td>
-                            </tr>
-                        
-                    @endforeach
-                    @if($final_url != route('home'))
+                
+                
+                    
+                        @foreach ($folders as $folder)
+                                <tr id='folder-{{$folder->id}}'>
+                                    <td style="padding:0px">
+                                            <a href="<?php echo url()->current();
+                                                        echo '/'.$folder->id;
+                                            ?>">
+                                                {{$folder->folder_name}}
+                                            </a>
+                                    </td>
+                                    <td style="padding:0px">{{$folder->user->name}}</td>
+                                    <td style="padding:0px">{{$folder->created_at}}</td>
+                                    <td style="padding:0px">{{$folder->updated_at}}</td>
+                                </tr>
+                        @endforeach
+                    @endif
+                    @if($final_url != route('home') AND count($documents)!= 0)
                         <tr>
                             <th style="padding:0px ; width: 44%">Document Name</th>
                             <th style="padding:0px ; width: 20%">Create By</th>
@@ -94,18 +96,18 @@
                         </tr>
                         @foreach ($documents as $doc)
                             
-                                <tr id='doc{{$doc->id}}'>
+                                <tr id='doc-{{$doc->id}}'>
                                     
                                     <td style="padding:0px">
                                         <a href="{{route('download' , [$branch_name,$current_folder,$doc->document])}}">
                                             {{$doc->document}}
                                         </a>
-                                        <form class="delete-form" id="delete-document{{$doc->id}}" style="display: inline" action="{{route('document.destroy',$doc->id)}}" method="POST">
+                                        <form class="delete-form" id="delete-document-{{$doc->id}}" style="display: inline" action="{{route('document.destroy',$doc->id)}}" method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             @csrf
                                             
                                             <a onclick="event.preventDefault();
-                                            document.getElementById('delete-document{{$doc->id}}').submit();" href="">
+                                            document.getElementById('delete-document-{{$doc->id}}').submit();" href="">
                                                 <img class="float-right" style="width: 20px"
                                                 src="{{asset('img/delete-icon.png')}}" alt="delete document">
                                             </a>

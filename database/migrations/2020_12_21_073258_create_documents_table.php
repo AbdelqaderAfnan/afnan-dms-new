@@ -22,6 +22,7 @@ class CreateDocumentsTable extends Migration
             $table->string('branch_name',200)->nullabel();
             $table->text('subject')->nullable();
             $table->text('document')->nullable();
+            $table->text('ext')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('folder_id')->references('id')->on('folders');
             $table->timestamps();
