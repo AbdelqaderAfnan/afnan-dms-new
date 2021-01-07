@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'] )->name('home');
 
-Auth::routes();
+
 
 //users routes
 Route::get('/profile/{user}',[App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
