@@ -65,14 +65,7 @@
                 {{$profile->position}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <span class="float-right font-weight-bold">image</span>
-            </div>
-            <div class="col-6">
-                {{$profile->image}}
-            </div>
-        </div>
+        
         <div class="row">
             <div class="col-6 offset-3">
                 <a style="width: 100%" class="btn btn-primary"

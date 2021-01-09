@@ -31,7 +31,8 @@
                     <span class="float-right font-weight-bold">Branch Name</span>
                 </div>
                 <div class="col-6">
-                    <input name="branch_name" type="text" {{$profile->branch_name}} class="form-control" width="75%" readonly>
+                    <input type="text" name="branch_name" id="branch_name" class="form-control" value="{{$profile->branch_name}}" readonly="">
+                        
                 </div>
             </div>
             <div class="row">
@@ -66,17 +67,11 @@
                     <input name="position" type="text" value="{{$profile->position}}" class="form-control">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <span class="float-right font-weight-bold">Image</span>
-                </div>
-                <div class="col-6">
-                    {{$profile->image}}
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-6 offset-3">
-                    <input type="submit" class="btn btn-primary" value="Save" style="width: 100% ; margin-bottom: 10px">
+                    <input type="submit" class="btn btn-primary" value="Save" style="width: 100% ; margin-bottom: 10px"
+                    onclick="return confirm('are you sure?');">
                     <a href="{{route('profile.show',Auth::user()->id)}}"><button class="btn btn-primary" value="back" style="width: 100%">back</button></a>
                 </div>
             </div>

@@ -31,7 +31,13 @@
                     <span class="float-right font-weight-bold">Branch Name</span>
                 </div>
                 <div class="col-6">
-                    <input name="branch_name" type="text" value="{{$user->branch_name}}" class="form-control" width="75%" >
+                    <select name="branch_name" id="branch_name" class="form-control">
+                        <option value="amman">Amman</option>
+                        <option value="baghdad">Baghdad</option>
+                        <option value="erbil">Erbil</option>
+
+                    </select>
+                    
                 </div>
             </div>
             <div class="row">
@@ -68,15 +74,25 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <span class="float-right font-weight-bold">Image</span>
+                    <span class="float-right font-weight-bold">Is Admin</span>
                 </div>
                 <div class="col-6">
-                    {{$user->image}}
+                    <select name="isadmin" id="isadmin" class="form-control">
+                        @if ($user->isadmin == '0')
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        @else
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        @endif
+
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 offset-3">
-                    <input type="submit" class="btn btn-primary" value="Save" style="width: 100% ; margin-bottom: 10px">
+                    <input type="submit" class="btn btn-primary" value="Save" style="width: 100% ; margin-bottom: 10px"
+                            onclick="return confirm('are you sure?');">
                     <a href="{{route('profile.show',Auth::user()->id)}}"><button class="btn btn-primary" value="back" style="width: 100%">back</button></a>
                 </div>
             </div>

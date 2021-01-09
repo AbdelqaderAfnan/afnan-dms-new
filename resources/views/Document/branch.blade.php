@@ -3,16 +3,18 @@
 @section('content')
 
 <?php 
+    $url = url()->current();
+    $test_url = parse_url($url, PHP_URL_SCHEME)."://".parse_url($url, PHP_URL_HOST)."/folders/branch/".$branch_name_url;
+
+
     
-    $test_url = "http://afnan-dms.test/folders/branch/".$branch_name_url;
-    //dd($current_folder);
-    if(url()->current() == $test_url)
+    if($url == $test_url)
     {
         $final_url =  route('home');
     }
     else
     {
-        $url = url()->current();
+        
         while (is_numeric(substr($url, -1)) ==  "true") {
             $url = substr($url, 0,-1);
         }
@@ -23,7 +25,7 @@
         <div class="d-flex bd-highlight mb-4">
             <div class="p-2 w-100 bd-highlight">
                 <h2 style="text-transform: uppercase;">
-                    <a style="color: black" href="http://afnan-dms.test/folders/branch/{{$branch_name_url}}">
+                    <a style="color: black" href="{{$test_url}}">
                         {{$branch_name}} Branch
                     </a>
                 </h2>
@@ -43,15 +45,17 @@
                 <button class="btn btn-success" id="btn-add">
                     Add Folder
                 </button>
-                @if ($final_url != route('home'))
-                    <form method="POST" action="{{route ('folder.destroy', $current_folder)}}"
-                                        style="display: contents;">
-                                        
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit" onclick="return confirm('Please confirm you want to delete!')">Delete</button>
-                    </form>    
-                
+                @if (Auth::user()->isadmin == 1)
+                    @if ($final_url != route('home'))
+                        <form method="POST" action="{{route ('folder.destroy', $current_folder)}}"
+                                            style="display: contents;">
+                                            
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Please confirm you want to delete!')">Delete</button>
+                        </form>    
+                    
+                    @endif
                 @endif
                 <a href="{{$final_url}}" class="btn btn-primary">
                     Back
@@ -102,16 +106,20 @@
                                         <a href="{{route('download' , [$branch_name,$current_folder,$doc->document])}}">
                                             {{$doc->document}}
                                         </a>
-                                        <form class="delete-form" id="delete-document-{{$doc->id}}" style="display: inline" action="{{route('document.destroy',$doc->id)}}" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            @csrf
+                                        @if (Auth::user()->isadmin == 1)
                                             
-                                            <a onclick="event.preventDefault();
-                                            document.getElementById('delete-document-{{$doc->id}}').submit();" href="">
-                                                <img class="float-right" style="width: 20px"
-                                                src="{{asset('img/delete-icon.png')}}" alt="delete document">
-                                            </a>
-                                        </form>
+                                        
+                                            <form class="delete-form" id="delete-document-{{$doc->id}}" style="display: inline" action="{{route('document.destroy',$doc->id)}}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                @csrf
+                                                
+                                                <a onclick="event.preventDefault();
+                                                document.getElementById('delete-document-{{$doc->id}}').submit();" href="">
+                                                    <img class="float-right" style="width: 20px"
+                                                    src="{{asset('img/delete-icon.png')}}" alt="delete document">
+                                                </a>
+                                            </form>
+                                        @endif
                                     </td>
                                     <td style="padding:0px">{{$doc->user->name}}</td>
                                     <td style="padding:0px">{{$doc->created_at}}</td>

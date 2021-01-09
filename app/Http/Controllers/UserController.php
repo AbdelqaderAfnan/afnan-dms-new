@@ -29,7 +29,7 @@ class UserController extends Controller
         
         $user = User::findOrFail(request('id'));
         $user->fill($request->all())->save();
-        if($url == "http://afnan-dms.test/cpanel/1/edit")
+        if(str_contains($url ,"cpanel"))
         {
             return redirect()->route('cpanel.index')
                         ->with('success','Profile has been updated');

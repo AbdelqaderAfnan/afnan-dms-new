@@ -8,15 +8,8 @@
                         Manage Users
                     
                 </h2>
-                
-                
             </div>
             <div class="p-2 flex-shrink-0 bd-highlight">
-                
-                
-                <button class="btn btn-success" id="btn-add">
-                    Manage Roles
-                </button>
                 
                 <a href="{{route('home')}}" class="btn btn-primary">
                     Back
@@ -31,7 +24,7 @@
                         <th>Branch</th>
                         <th>Is Admin</th>
                         <th>Email</th>
-                        <th>Role</th>
+                        
                         <th>#</th>
                     </tr>
                 </thead>
@@ -39,12 +32,16 @@
                     @foreach ($users as $user)
                         <tr class="text-center">
                             <td class="text-center">{{$user->name}}</td>    
-                            <td class="text-center">{{$user->branch_name}}</td>    
-                            <td class="text-center">{{$user->isadmin}}</td>    
+                            <td class="text-center">{{$user->branch_name}}</td>  
+                            @if ($user->isadmin == 1)
+                                <td class="text-center">Yes</td>    
+                            @else
+                                <td class="text-center">No</td>
+                            @endif  
                             <td class="text-center">{{$user->email}}</td>    
-                            <td></td>
+                            
                             <td style="width: 19%" class="text-center">
-                                <button class="btn btn-primary">Show</button>
+                                
                                 <a class="btn btn-secondary" href="{{route('cpanel.edit', Auth::user()->id)}}">Edit</a>
                                 <form action="{{route('users.destroy',$user->id )}}" method="POST" style="display: inline">
                                     @method('delete')
