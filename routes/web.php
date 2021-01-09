@@ -36,7 +36,8 @@ Route::resource('folder' ,App\Http\Controllers\FolderController::class );
 Route::get('/folders/branch/{x}' , [App\Http\Controllers\FolderController::class , 'branchDoc'])->where('x', '.*')->name('doc_branch');
 Route::get('/users' , [App\Http\Controllers\UserController::class , 'index'])->name('users.index');
 Route::delete('/users/{user}' , [App\Http\Controllers\UserController::class , 'destroy'])->name('users.destroy');
-
+Route::get('/user' , [App\Http\Controllers\UserController::class , 'create'])->name('user.create');
+Route::post('/user' , [App\Http\Controllers\UserController::class , 'store'])->name('user.store');
 Route::get('download/{branch_name}/{folder_id}/{filename}', function($branch_name , $folder_id , $filename)
 {
     // Check if file exists in app/storage/file folder

@@ -10,7 +10,9 @@
                 </h2>
             </div>
             <div class="p-2 flex-shrink-0 bd-highlight">
-                
+                <a href="{{route('user.create')}}" class="btn btn-success">
+                    Add New User
+                </a>
                 <a href="{{route('home')}}" class="btn btn-primary">
                     Back
                 </a>
@@ -46,7 +48,9 @@
                                 <form action="{{route('users.destroy',$user->id )}}" method="POST" style="display: inline">
                                     @method('delete')
                                     @csrf
-                                    <input class="btn btn-danger" type="submit" value="Delete" name="submit">
+                                    <input class="btn btn-danger" type="submit" value="Delete" 
+                                    onclick="return confirm('are you sure? ');"
+                                    name="submit">
                                 </form>
                             </td>
                         </tr>    

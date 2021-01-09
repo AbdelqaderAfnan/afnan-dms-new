@@ -103,7 +103,7 @@
                                 <tr id='doc-{{$doc->id}}'>
                                     
                                     <td style="padding:0px">
-                                        <a href="{{route('download' , [$branch_name,$current_folder,$doc->document])}}">
+                                        <a href="{{route('document.show' , $doc->id )}}">
                                             {{$doc->document}}
                                         </a>
                                         @if (Auth::user()->isadmin == 1)

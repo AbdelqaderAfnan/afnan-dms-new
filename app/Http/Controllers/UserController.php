@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function __construct()
@@ -26,7 +27,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $url =url()->previous();
-        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            
+        ]);
         $user = User::findOrFail(request('id'));
         $user->fill($request->all())->save();
         if(str_contains($url ,"cpanel"))
@@ -48,6 +53,29 @@ class UserController extends Controller
     }
     public function index()
     {
+        
+        $users = User::latest()->get();
+        return view('admin.cpanel.index' , ['users'=>$users]);
+        
+    }
+    public function create()
+    {
+        return view('admin.cpanel.create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $create =User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'isadmin' => '0',
+            'branch_name' => $request['branch_name'],
+        ]);
         $users = User::latest()->get();
         return view('admin.cpanel.index' , ['users'=>$users]);
         

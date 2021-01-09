@@ -91,7 +91,8 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        return view('Document.show',['Document'=>$document]);
+  
+        return view('Document.show',['document'=>$document]);
     }
 
     /**
@@ -128,12 +129,21 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-       
+        
         $destinationPath = public_path('images'."\\".$document->branch_name ."\\".
                             $document->folder_id);
         $delete = unlink($destinationPath.'/'.$document->document);
         $document->delete();
-        return redirect(url()->previous());
+        $url_test = url()->previous();
+        $url_previous = session('back_url');
+        if(str_contains($url_test ,"branch"))
+        {
+            return redirect(url()->previous());
+        }    
+        else
+        {
+            return redirect($url_previous);
+        }
     }
     
 }
