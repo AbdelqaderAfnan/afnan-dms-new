@@ -4,6 +4,7 @@
 </style>
 @section('content')
     <div class="container">
+        <a href="{{route('profile.show',Auth::user()->id)}}"><button class="btn btn-primary" value="Back" >Back</button></a>
         <form action="{{route('profile.update', Auth::user()->id)}}" method="POST" class="">
             <div class="row">
                 <div class="col-6 offset-3">
@@ -72,7 +73,7 @@
                 <div class="col-6 offset-3">
                     <input type="submit" class="btn btn-primary" value="Save" style="width: 100% ; margin-bottom: 10px"
                     onclick="return confirm('are you sure?');">
-                    <a href="{{route('profile.show',Auth::user()->id)}}"><button class="btn btn-primary" value="back" style="width: 100%">back</button></a>
+                    
                 </div>
             </div>
             <input type="hidden" name="id" value="{{Auth::user()->id}}">
