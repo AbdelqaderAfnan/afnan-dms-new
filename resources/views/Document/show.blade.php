@@ -16,7 +16,7 @@
             
             
            
-            @if (Auth::user()->isadmin == 1)
+            @if (Auth::user()->isadmin == 1 or Auth::user()->id == $document->id)
                 <form method="POST" action="{{route ('document.destroy', $document)}}"
                     style="display: contents;">
                     
